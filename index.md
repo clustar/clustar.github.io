@@ -1,37 +1,51 @@
-## Welcome to GitHub Pages
+# Clustar
 
-You can use the [editor on GitHub](https://github.com/clustar/clustar.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+**Release:** 0.0.1
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+**Date:** March 15, 2021 
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Import
 
-```markdown
-Syntax highlighted code block
+-- How to install clustar --
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```{python}
+pip install clustar
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
 
-### Jekyll Themes
+-- How to run clustar --
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/clustar/clustar.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```{python}
+from clustar.search import Clustar
+import os
 
-### Support or Contact
+# Change directory to folder containing FITS files.
+fits_path = r"C:\Users\pavan\Projects\Capstone\Tobin_Data"
+os.chdir(fits_path)
+files = os.listdir()
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Run clustar algorithm to extract groups.
+cs = Clustar()
+output = cs.run(files)
+
+```
+
+## Output
+
+-- Visualize output --
+
+```{python}
+from matplotlib import pyplot as plt
+from astropy.io import fits
+
+# Plot each FITS file that contains abnormal groups.
+for file_path in output:
+    file = fits.open(file_path)
+    image = file[0].data[0,0,:,:]
+    file.info()
+    plt.imshow(image, origin='lower')
+    plt.colorbar()
+    plt.show()
+```
