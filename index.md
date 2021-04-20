@@ -1,6 +1,6 @@
 # Clustar
 
-**Release:** 0.0.1
+**Release:** 1.1.9
 
 **Date:** March 15, 2021 
 
