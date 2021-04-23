@@ -21,7 +21,7 @@ files = os.listdir()
 files = [f for f in files if '.fits' in f]
 ```
 
-Now, you're ready to run `Clustar`.
+Now, you're ready to run Clustar.
 
 
 ```python
