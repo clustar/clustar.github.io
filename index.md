@@ -1,14 +1,24 @@
+# About
+
 ### Clustar
 
 Release: 1.1.10
 
 Date: April 23, 2021
 
-### Import
+Addiitonal documentation is available at the following links:
 
--- how to install clustar -- 
+* [Basic usage](https://clustar.github.io/basic_usage)
 
-''' pip install clustar '''
+* [Examples](https://clustar.github.io/examples)
+
+### Installation
+
+Clustar is available on [PyPI](https://pypi.org/project/clustar/0.0.1/) and can be installed using pip.
+
+```python
+pip install clustar
+```
 
 ### Overview
 
@@ -21,7 +31,7 @@ The motivation for using clustar is to identify prostars/ protoplanetary disks f
 
 ### Preprocessing
 
-Clustar crops the input image from a square dimension to a circle. This is done to alleviate the higher noise around the edges of the image. After cropping, clustar utilizes a technique known as sigma clipping to filter out the data points that are 5 times the RMS statistic. 
+Clustar crops the input image from a square dimension to a circle. This is done to alleviate the higher noise around the edges of the image. After cropping, clustar utilizes a technique known as sigma clipping to filter out the data points that are 5 times the RMS statistic.
 
 ![](readme_Images/image%202.png)
 ### Grouping
@@ -33,9 +43,4 @@ Clustar crops the input image from a square dimension to a circle. This is done 
 ![](readme_Images/image%204.png)
 ### Summary
 
-Clustar should be utilized to identify protostars and other potential celestial objects that are suspected to be non-bivariate Gaussian. The t-SNE clustering methods further identify images with substructures that may be of interest. Anyone that works with FITSits files can utilize the different methods idependently or as a pipeline to preprocess, group, fit, and cluster their data.
-
-
-```python
-
-```
+Clustar should be utilized to identify protostars and other potential celestial objects that are suspected to be non-bivariate Gaussian. The t-SNE clustering methods further identify images with substructures that may be of interest. Anyone that works with FITSits files can utilize the different methods independently or as a pipeline to preprocess, group, fit, and cluster their data.
