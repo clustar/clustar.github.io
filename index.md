@@ -57,4 +57,4 @@ The residuals are obtained by subtracting the fit from the group data. Next, we 
 
 ### Summary
 
-Clustar should be utilized to identify protostars and other potential celestial objects that are suspected to be non-bivariate Gaussian. The t-SNE clustering methods further identify images with substructures that may be of interest; nonetheless, this package is open to anyone that works with FITS files can utilize the different methods independently or as a pipeline to preprocess, group, fit, and cluster their data.
+Clustar should be utilized to identify protostars and other potential celestial objects that are suspected to be non-bivariate Gaussian. The t-SNE clustering methods further identify images with substructures that may be of interest; nonetheless, this package is open to anyone that works with FITS files. They can utilize our package methods independently or as a pipeline to preprocess, group, fit, and cluster their data.
