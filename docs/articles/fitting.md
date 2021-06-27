@@ -7,7 +7,7 @@ The last step in the group-detection pipeline is fitting a bivariate Gaussian mo
 Generally, many protostellar objects have a disk-like shape that conforms to a bivariate Gaussian distribution. The input parameters for this model are the two-dimensional weighted means and the associated covariance matrix.
 
 <center>
-    <img src="../image/equation.png">
+    <img src="../image/equation.png" width=500>
 </center>
 
 In the Clustar package, the `compute_fit` method calculates the respective bivariate Gaussian model for each detected group in the FITS image. Then, a min-max normalization is performed on the bivariate Gaussian model with respect to the original data. The residuals are obtained by taking the difference of the intensities between the model and the observed data. Shown below are the normalized bivariate Gaussian models (depicted on the right) associated with each detection (depicted on the left), given the previous FITS image.
