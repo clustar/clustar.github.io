@@ -1,6 +1,9 @@
-- name: Introduction
+- name: "Introduction"
   href: intro.md
-- name: 'Secondary Content'
-  href: content2.md
-- name: 'More Content'
-  href: content3.md
+- name: "Denoising"
+  href: denoising.md
+- name: "Grouping"
+  href: grouping.md
+- name: "Fitting"
+  href: fitting.md
+  
