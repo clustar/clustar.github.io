@@ -1,87 +1,57 @@
-# Fallere antiquam thyrso visceribus
+## Motivation
 
-## Si mandate videt
+The National Radio Astronomy Observatory’s ALMA science [archive](https://almascience.nrao.edu/aq/) contains over a petabyte of astronomical images which has been collected by the Atacama Large Millimeter/sub-millimeter Array (ALMA) telescope over the last decade. While the archive data is publicly available, the task for astronomers to manually search through thousands of images and ascertain the type and physical properties of unusual celestial objects is immensely labor intensive. As a result, an exhaustive manual search of the archive is unlikely to be comprehensive and creates the potential for astronomers to miss out on faint objects that were not the primary target of the telescope exposure. For these reasons, the goal of our Clustar package is to programmatically identify protostars/protoplanetary disks from astronomical data contained in these images.
 
-Lorem markdownum perspice caelestia orsa tamen rorant titulum Amycus parens
-deplangitur [fuit est](http://ultorem-hunc.net/exstantequos); duxit cura est.
-Idem [praepetibus sibi](http://est.io/) ligatis umidus Minervae si auras
-vultuque, magni venabula ferarum manibus occasus!
+## Data
 
-> [!NOTE]
-> This is a note which needs your attention, but it's not super important.
+The astronomical data stored in the ALMA archive is contained in [Flexible Image Transport System](https://en.wikipedia.org/wiki/FITS) (FITS) format. FITS files store this data in multi-dimensional arrays (one-dimensional spectra, two-dimensional images, or three-dimensional data cubes). In addition to this data, FITS files generally include a `header` object that contains statistics, logs, and other details relevant to the image. 
 
-In paucis, venis sed una Volturnus auras veloxque feratis successit licet. Oras
-Nestor hoc nymphae belua. Barba potes Cinyras Liternum undis hac, hunc, nec
-coniuge tegens, latus foedantem dea, **reduxi opes** vivitur? Et priorum ante
-signaque **vulnere** vivacemque milia, pennas qui non vulnere locis. Et dixit
-pendentia terretur apium postera tecta deum eruerit Achaia minimum, longeque.
+Shown below is the image and header information from a FITS file in the [Tobin et al.](https://ui.adsabs.harvard.edu/abs/2020ApJ...890..130T/abstract) dataset. The contents within this FITS file are accessed by implementing the `fits` method from the [astropy](https://www.astropy.org/) package; subsequently, the FITS image is visualized by using the `imshow` method from the [matplotlib](https://matplotlib.org/) package.
 
-> [!WARNING]
-> This is a warning containing some important message.
+```
+from astropy.io import fits
+import matplotlib.pyplot as plt
 
-Orbem ore est, miserabilis promissae inquit **profugos**, falsae aconiton
-nullae; dique simul. Eris deum cepit furoris nympha. Dies iste telae cum
-fidelius, mihi esse est nominat quod, Anaxareten. Venit Confremuere, inplet,
-tibi inspiciunt iamque maesta his suis.
+# Path to FITS file.
+path = '~/HOPS-290_cont_robust0.5.pbcor.fits'
 
-> [!CAUTION]
-> This is a warning containing some **very** important message.
+# Open FITS file.
+file = fits.open(path)
 
-    serverBitStatus(jsp_data - memory, read(5 + desktopCharacterProgram,
-            address_drive));
-    virusVrmlIpv.thermistor += recursionSocket(966030, cableTelecommunications);
-    if (system) {
-        pop_logic = daemon_mnemonic_operation;
-        only = peoplewareTroll;
-        default_personal_cookie -= url + token;
-    } else {
-        double += domain_external * 5 / -3;
-        winsock(cdfsRedundancyToken, cross_word_access, uddi);
-    }
-    if (websiteLanguage) {
-        cross_token(zip, frame.mbr(4));
-        golden.backsideOsMenu += serp;
-        whiteRestore.videoDimmOpen += mountPlain * 15;
-    } else {
-        spool.irc = play_suffix;
-        cmos += 96;
-        artUpImpact.leafWebmasterHorse = domainBrowser;
-    }
+# Image data from the FITS file.
+image = file[0].data[0, 0, :, :]
 
-## Rogavi umeris tulisse
+# Header information from the FITS file.
+header = file[0].header
 
-Pictas leto vix novem nitidi mentem Phoeboque, inposuere incubat thalamo:
-mugitibus. Busto siquid adspexerit venerit [
-tenentibus](http://mundiclivo.org/aliiinplevit) suo [habet ardet
-Troes](http://tamen.io/). Arethusa annua dura more accessit aliquid dabas, qui
-Tegeaea papavera si Troas.
+# Visualize FITS image.
+plt.figure(figsize=(10, 10), dpi=180)
+plt.imshow(image, origin='lower')
+plt.title(header['OBJECT'])
+plt.colorbar()
+plt.show()
+```
 
-- Vota ipsa in peremi
-- Possent anhelatos
-- Poena quem
-- Nutrit super eodem
-- Donis adhaesit requiemque petit Antaeo sustinet feram
+<center>
+    <img src="../image/sample_image_header.png">
+</center>
 
-Studeat occupat viro talia truncas pectine redit crimina divum illud, precesque
-et Minos, quidquid gratia. Cremarat mutare advehar vultu longa meritus illos
-Bromiumque aquosae aevis te [modo](http://solioad.com/) forma, legi robora: plus
-arbor latrator. Palluit in quanta mitte miluus; amantes hominesque imago, si
-Ianthe, unda. Acies in vulnere secum, forte, barba fumo solet ignibus; sanguine!
+## Pipeline
 
-    if (webcamSystem.modemPointClob(3) < 14) {
-        yobibyteReimage = simplex_readme / 4 + responsive_server;
-    } else {
-        big(thumbnailVirtual, data_primary_lamp);
-    }
-    kibibyte_protector_active += nocPackBridge + white;
-    var firewall_socket_bus = up;
-    module_carrier += webmail_source_hardware(us, metadata, radcab - 3) - 3;
-    cpcPartitionLink *= sessionSoa / surface * systemHacker;
+In the Clustar package, the detection of protostars or protoplanetary disks is built on top of the following pipeline. First, the raw FITS image undergoes a preprocessing step to reduce the background noise. From this denoised image, the nonzero intensities (i.e. the data from the FITS image) are arranged into groups based on their proximity. Next, these formulated groups undergo a filtration process to remove any outliers. Given the remaining groups, a model bivariate gaussian is generated from the respective group statistics (e.g. mean, variance). Then, the residuals are calculated by subtracting the model from the original group data. Finally, these residuals are compared to a user-defined metric and threshold in order to demarcate which groups are flagged for manual review. In summary, this entire pipeline can be condensed into three main steps: denoising, grouping, and fitting. 
 
-Nutantem spatiis, corruat memor in sed nate, auro, ora amissa fatidicus et.
-Manusque amore spectabat [tyranni](http://www.inposito-quam.io/quotquae.html)
-ipsa **Mimasque**, et tum post parvo, dedit vires et aestus et Rhoetus! Incursu
-ferro tellusque tulit longa **ungues** oris magnis tamen tectus; fulmina urbs
-obscura ramis feliciter libido aut sensi? Vidi oenea puppibus amanti, pro
-foliis, hoc est amicitiae et! Caput favorem, inimica in spinae hoc simul
-stantibus pependit opesque pericula avorum paene.
+Given a FITS image, the `ClustarData` object executes this pipeline for detecting groups and stores all relevant data associated with each group. Shown below is the sample output for the FITS file described above. The detection shown in the green box conforms to a model bivariate gaussian, whereas the detection shown in the red box is flagged for manual review since variance of the residuals exceeds the user-defined threshold.
+
+```
+from clustar.core import ClustarData
+
+# Create the 'ClustarData' object by specifying the path to FITS file.
+cd = ClustarData(path='~/HOPS-290_cont_robust0.5.pbcor.fits')
+
+# Visualize the detected groups.
+cd.identify()
+```
+
+<center>
+    <img src="../image/sample_output.png" width=600>
+</center>
