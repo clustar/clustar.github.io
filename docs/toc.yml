@@ -1,9 +1,9 @@
-- name: Changelog
-  href: CHANGELOG.md
-- name: Sample Articles
-  href: articles/
-- name: Sample API
-  href: api/
+- name: Overview
+  href: overview.md
+- name: Documentation
+  href: documentation/
+- name: Usage
+  href: usage.md
   topicHref: api/index.md
 - name: GitHub
-  href: https://github.com/ovasquez/docfx-material/
+  href: https://github.com/clustar/clustar
