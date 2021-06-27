@@ -1,7 +1,7 @@
 - name: Overview
   href: overview.md
 - name: Documentation
-  href: documentation/
+  href: articles/
 - name: Usage
   href: usage.md
   topicHref: api/index.md
