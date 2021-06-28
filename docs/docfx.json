@@ -7,15 +7,18 @@
           "articles/**/toc.yml",
           "toc.yml",
           "*.md",
-          "api/**.md",
-          "api/**/toc.yml"
+          "usage/**.md",
+          "usage/**/toc.yml",
+          "documentation/**.md",
+          "documentation/**/toc.yml"
         ]
       }
     ],
     "resource": [
       {
         "files": [
-          "images/**"
+          "image/**",
+          "examples/**"
         ]
       }
     ],
@@ -31,11 +34,11 @@
       "ExtractSearchIndex"
     ],
     "globalMetadata": {
-      "_appFooter": "<span>Copyright © 2019 Oscar Vasquez<br>Generated with <strong>DocFX</strong></span>",
-      "_appTitle": "DocFX Material",
+      "_appFooter": "<span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>",
+      "_appTitle": "Clustar",
       "_enableSearch": "true",
       "_gitContribute": {
-        "repo": "https://github.com/ovasquez/docfx-material"
+        "repo": "https://github.com/clustar/clustar.github.io"
       },
       "_gitUrlPattern": "github"
     },

@@ -3,7 +3,6 @@
 - name: Documentation
   href: documentation/
 - name: Usage
-  href: usage.md
-  topicHref: api/index.md
+  href: usage/
 - name: GitHub
   href: https://github.com/clustar/clustar
