@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Search | Clustar </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Search | Clustar ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="search">Search</h1>
+
+<p>Contains the <code>Clustar</code> hierarchical class, which is responsible for transforming all available FITS images in a specified directory into their
+respective <code>ClustarData</code> objects. <code>Clustar</code> class uses multithreading to expedite the processing of the FITS images.</p>
+<hr>
+<h2 id="clustar"><code>Clustar</code></h2>
+<p>A class for executing the entire pipline for detecting groups from a directory of FITS files and for storing all relevant data associated with each file.</p>
+<h3 id="parameters">Parameters</h3>
+<p><code>**kwargs</code> : (optional) Same as <code>~clustar.core.ClustarData.params</code> arguments. Copy of that documentation is listed below for convenience.</p>
+<h3 id="keywords">Keywords</h3>
+<ul>
+<li><code>radius_factor</code> : (<code>float</code>) Factor mulitplied to radius to determine cropping circle in the denoising process; must be within the range [0, 1].</li>
+<li><code>chunks</code> : (<code>int</code>) Number of chunks to use in a grid; must be an odd number.</li>
+<li><code>quantile</code> : (<code>float</code>) Quantile of RMS to determine the noise level; must be within the range [0, 1].</li>
+<li><code>apply_gradient</code> : (<code>bool</code>) Determine if the FITS image should be multiplied by a gradient in order to elevate central points; similar to multiplying the FITS image by the associated 'pb' data.</li>
+<li><code>sigma</code> : (<code>float</code>) Factor multiplied to noise level to determine the cutoff point, where values less than this threshold are set to zero.</li>
+<li><code>alpha</code> : (<code>float</code>) Determines the size of the ellipse in relation to the chi-squared distribution; must be within the range (0, 1).</li>
+<li><code>buffer_size</code> : (<code>int</code>) Number of points considered outside of the group range. For instance, given a 1-d group range of [10, 20], the algorithm checks for nonzero points within the range [5, 25] when the 'buffer_size' is 5.</li>
+<li><code>group_size</code> : (<code>int</code>) Minimum number of nonzero points that determines a group.</li>
+<li><code>group_factor</code> : (<code>float</code>) Ratio between [0, 1] that specifies the minimum number of nonzero points that determines a group in relation to the number of nonzero points in the largest group.</li>
+<li><code>metric</code> : (<code>str</code>) Method used for evaluating the groups; must be one of the following: <code>&quot;standard_deviation&quot;</code>, <code>&quot;variance&quot;</code>, <code>&quot;average&quot;</code>, or <code>&quot;weighted_average&quot;</code>.</li>
+<li><code>threshold</code> : (<code>float</code>) Cutoff point that determines which groups are flagged for manual review, given the specified metric.</li>
+<li><code>split_binary</code> : (<code>bool</code>) Experimental; determine whether binary subgroups identified within a group should be split into individual groups.</li>
+<li><code>subgroup_factor</code> : (<code>float</code>) Experimental; ratio between [0, 1] that specifies the subgroup range in terms of the absolute maximum intensity.</li>
+<li><code>evaluate_peaks</code> : (<code>bool</code>) Experimental; determine whether the peaks of the output residuals should be taken into consideration in the flagging process.</li>
+<li><code>smoothing</code> : (<code>int</code>) Experimental; size of window used in the moving average smoothing process for peak evaluation.</li>
+<li><code>clip</code> : (<code>float</code>) Experimental; determines the percentage of tail values that are trimmed for peak evaluation.</li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>data</code> : (<code>list</code>) List of <code>ClustarData</code> objects corresponding to the FITS file in the directory.</li>
+<li><code>errors</code> : (<code>list</code>) List of FITS files that raised an error in the processing.</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<pre><code>from clustar.search import Clustar
+
+# Setup 'Clustar' object.
+cs = Clustar(radius_factor=0.95, threshold=0.025)
+
+# Execute pipeline on directory containing FITS files.
+cs.run(directory='~/data/')
+
+# Access individual 'ClustarData' objects.
+cs.data
+
+# Check which FITS files raised an error.
+cs.errors
+
+# Inspect 'ClustarData' variables for all groups in each FITS file.
+cs.display(category='all')
+
+</code></pre>
+<hr>
+<h2 id="run"><code>run</code></h2>
+<p>Main <code>Clustar</code> method for executing the pipeline for group detection.</p>
+<h3 id="parameters-1">Parameters</h3>
+<ul>
+<li><code>directory</code> : (<code>str</code>) Path to folder containing FITS files.</li>
+</ul>
+<h3 id="raises">Raises</h3>
+<p><code>AssertionError</code> : If there are no FITS files at the specified directory.</p>
+<hr>
+<h2 id="display"><code>display</code></h2>
+<p>Generates a Pandas data frame object containing the specified variables.</p>
+<h3 id="parameters-2">Parameters</h3>
+<ul>
+<li><code>category</code> : (<code>str</code>, optional) If category is <code>&quot;summary&quot;</code>, then a subset of <code>ClustarData</code> variables are returned in the data frame. If category is <code>&quot;all&quot;</code>, then all  singular <code>ClustarData</code> variables are returned in the data frame.</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p><code>DataFrame</code></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/clustar/clustar.github.io/blob/main/docs/documentation/search.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

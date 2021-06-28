@@ -1,0 +1,401 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/pavan/OneDrive/Data Science/Projects/clustar.github.io/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/denoising.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/denoising.html",
+          "hash": "enb5GYl72JRm3ghDQdNF/ZMKDaM5ss+d9AZ3BjwSTcE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/fitting.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/fitting.html",
+          "hash": "YLEDAwv3PnS2ImLGrmBx/qacb+IXjKkGaApl89d4Zf4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/grouping.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/grouping.html",
+          "hash": "mbqLw9ap+Z8JslowkVBCsBY7GI7gDyKua78J9wOcMoI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "LIK3lsvkLXiLeXLKNqIAEqi7FB08IwlxCi/zHP4T3hk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "3IlWEjkTkkCHYQpwgEaKvLbb4fDarXeIjOd6JY0/u1I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/core.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/core.html",
+          "hash": "aCDXlMAU0tOv2vpaqJ32dpPChsS7PcKBGnS2z02E5nY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/denoise.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/denoise.html",
+          "hash": "uY+10jUyGdoMH/NIxUe6p0FC530g0iNeyz1F1oSMStQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/fit.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/fit.html",
+          "hash": "p+339EUP6feMIqyFpA+8MBr1csCycEIqTtwmSx4Ydkw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/graph.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/graph.html",
+          "hash": "WwLtaaO50zMHy2GfVkoWK8rqPPU7PY7hsBZUTCjeWV0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/group.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/group.html",
+          "hash": "pLlzr941zw5n+1oXxocljo7wSc8euxPccS+eMIbXjU8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/search.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/search.html",
+          "hash": "T2rsP2qWlngCjuoYRcQEs0XQwKZ+fHVn2D/ZrErG+bA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "documentation/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/toc.html",
+          "hash": "n92pgqIY/wFc3BtqQJ6kYyUvMCID4CwNPwj4PuG+X5Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "examples/alma.html",
+      "output": {
+        "resource": {
+          "relative_path": "examples/alma.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "examples/alma.ipynb",
+      "output": {
+        "resource": {
+          "relative_path": "examples/alma.ipynb"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/alpha_parameter.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/alpha_parameter.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/buffer_size.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/buffer_size.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/denoise.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/denoise.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/equation.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/equation.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/fit_model.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/fit_model.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/group_detection.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/group_detection.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/radial_gradient.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/radial_gradient.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/radius_factor.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/radius_factor.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/residuals.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/residuals.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/sample_image_header.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/sample_image_header.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "image/sample_output.png",
+      "output": {
+        "resource": {
+          "relative_path": "image/sample_output.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "FpUrX/6iMPycBdOeIvklLGCWSuLO9QJ5Td89o3NfchM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+nYJI63qysgkqxila15DuC0d/2COrYUbQJz+QpjZD6M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "usage/examples.md",
+      "output": {
+        ".html": {
+          "relative_path": "usage/examples.html",
+          "hash": "Aa6xAzlCGM4HrCRvxQ7xEuLDWPDubpv3bGYUT3lYZjc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "usage/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "usage/toc.html",
+          "hash": "6dEtoHLq/5GRE93l/abzG7mAQdUYwY8KEzF886uNfyk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 12,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

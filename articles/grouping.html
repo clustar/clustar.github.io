@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Overview | Clustar </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Overview | Clustar ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="overview">Overview</h2>
+
+<p>After denoising the image, the next step is to arrange the remaining nonzero intensities into groups, while accounting for any outliers. In the module <code>group.py</code>, all of the methods related to this step are listed.</p>
+<h2 id="arrange-points">Arrange Points</h2>
+<p>In this package, the <code>arrange</code> method organizes the nonzero intensities into groups based on their proximity. A group is defined as set of neighboring intensities, and a group-range delimits the bounds of a group. Given an integer <code>buffer_size</code>, all nonzero points that lie within this group-range are accounted as one group; particularly, the <code>buffer_size</code> is the number of pixels around the group that are examined for nonzero intensities. Shown below is a figure of how the <code>buffer_size</code> parameter affects the grouping.</p>
+<center>
+    <img src="../image/buffer_size.png" width="500">
+</center>
+<p>For both images, pixels containing zero intensities are depicted in purple, while those containing nonzero intensities are shown in yellow. The group arrangements are represented by the green squares. On the left, a <code>buffer_size</code> of $1$ yields three groups; on the right, a <code>buffer_size</code> of $2$ yields two groups.</p>
+<p>From these preliminary group-ranges, the <code>rectify</code> method ensures that these group-ranges are squares (i.e. height and width of groups are equivalent). Next, the <code>merge</code> method eliminates all smaller group-ranges that lie completely inside a larger group-range; this step makes sure that the labeled groups are independent.</p>
+<h2 id="outlier-filtration">Outlier Filtration</h2>
+<p>Even after denoising, the resulting data could still contain nonzero intensities that represent noise. The <code>refine</code> method accounts for these outliers by employing the <code>group_size</code> and/or <code>group_factor</code> specifications. The <code>group_size</code> parameter defines the minimum number of nonzero points that determines a group. Similarly, the <code>group_factor</code> ratio (lies within $[0, 1]$) specifies the minimum number of nonzero points that determines a group in relation to the number of nonzero points in the largest group. After this step, the <code>extract</code> method pulls the original FITS data for each group, given the group-range.</p>
+<p>Lastly, the <code>screen</code> method removes groups that are faint and distant from the center of the FITS image. To accomplish this, the <code>screen</code> method calculates the maximum intensity in the remaining groups relative to the entire FITS image as well as the Euclidean distance of the groups' center to the image center. Given that both of these metrics are strictly less than $1$, the arithmetic mean of these measures yields an &quot;outlier score.&quot; If this score is less than the default threshold of $0.25$, then that group is considered to be an outlier and is subsequently removed. Shown below are the two detected groups from the previously denoised FITS image.</p>
+<center>
+    <img src="../image/group_detection.png" width="500">
+</center>
+<h2 id="group-statistics">Group Statistics</h2>
+<p>From the remaining groups, the <code>calculate</code> method computes the following statistics on the group data.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: left;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>x_bar</code></td>
+<td style="text-align: left;">Average of index values in the 'x' position weighted by the corresponding group data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y_bar</code></td>
+<td style="text-align: left;">Average of index values in the 'y' position weighted by the corresponding group data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>x_var</code></td>
+<td style="text-align: left;">Variance of index values in the 'x' position weighted by the corresponding group data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y_var</code></td>
+<td style="text-align: left;">Variance of index values in the 'y' position weighted by the corresponding group data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>covariance</code></td>
+<td style="text-align: left;">Covariance of the index values weighted by the corresponding group data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>covariance_matrix</code></td>
+<td style="text-align: left;">Covariance matrix for the multivariate normal that is used in the fitting process.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>rho</code></td>
+<td style="text-align: left;">Correlation coefficient computed from the covariance matrix.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>eigen_values</code></td>
+<td style="text-align: left;">Eigenvalues obtained from the eigendecomposition of the covariance matrix.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>eigen_vectors</code></td>
+<td style="text-align: left;">Eigenvectors obtained from the eigendecomposition of the covariance matrix.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>x_len</code></td>
+<td style="text-align: left;">Length of the major axis of the ellipse in pixels.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y_len</code></td>
+<td style="text-align: left;">Length of the minor axis of the ellipse in pixels.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>radians</code></td>
+<td style="text-align: left;">Rotation of ellipse denoted in radians.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>degrees</code></td>
+<td style="text-align: left;">Rotation of ellipse denoted in degrees.</td>
+</tr>
+</tbody>
+</table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/clustar/clustar.github.io/blob/main/docs/articles/grouping.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

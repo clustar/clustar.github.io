@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Clustar | Clustar </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Clustar | Clustar ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="clustar">Clustar</h1>
+
+<p>Release: 1.2.1</p>
+<p>Date: June 27, 2021</p>
+<h2 id="overview">Overview</h2>
+<p>A python package for processing and analyzing protostars/protoplanetary disks
+in astronomical data in Flexible Image Transport System (FITS) images.</p>
+<p>These files contain grayscale images represented as two-dimensional arrays,
+with each pixel containing the intensity values, and headers containing the
+telescope observational parameters.</p>
+<p>Clustar simplifies and expediates the identification pipeline of FITS files
+by automating the preprocessing, grouping, and fitting for a large amount of
+FITS files.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Clustar 1.2.1 requires</p>
+<ul>
+<li>GEOS &gt;= 3.3</li>
+<li>Shapely &gt;= 1.7.1</li>
+</ul>
+<p>Both of these dependencies are available on <a href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a>.</p>
+<pre><code>conda install -c conda-forge geos
+conda install -c conda-forge shapely 
+</code></pre>
+<h2 id="installation">Installation</h2>
+<p>Clustar is available on <a href="https://pypi.org/project/clustar/">PyPI</a> and can be installed using <code>pip</code>:</p>
+<pre><code>pip install clustar
+</code></pre>
+<h2 id="singular-usage">Singular Usage</h2>
+<p>Detect celestial objects in a singular FITS image by creating a <code>ClustarData</code>
+object.</p>
+<pre><code>from clustar.core import ClustarData
+
+# Create the 'ClustarData' object by specifying the path to FITS file.
+cd = ClustarData(path='~/data/example.fits', threshold=0.025)
+
+# Visualize the detected groups.
+cd.identify()
+
+# Access individual 'Group' objects.
+cd.groups
+</code></pre>
+<h2 id="multiple-usage">Multiple Usage</h2>
+<p>Detect celestial objects in a directory containing multiple FITS images by
+creating a <code>Clustar</code> object.</p>
+<pre><code>from clustar.search import Clustar
+
+# Setup 'Clustar' object.
+cs = Clustar(radius_factor=0.95, threshold=0.025)
+
+# Execute pipeline on directory containing FITS files.
+cs.run(directory='~/data/')
+
+# Access individual 'ClustarData' objects.
+cs.data
+
+# Check which FITS files raised an error.
+cs.errors
+
+# Inspect 'ClustarData' variables for all groups in each FITS file.
+cs.display(category='all')
+</code></pre>
+<h2 id="modules">Modules</h2>
+<ol>
+<li><p><code>base.py</code></p>
+<p>Internal module for testing clustar modules.</p>
+</li>
+<li><p><code>core.py</code></p>
+<p>Contains the <code>ClustarData</code> class, which is responsible for executing
+the entire project pipeline for detecting groups in a single FITS image.</p>
+</li>
+<li><p><code>denoise.py</code></p>
+<p>Clustar module for denoising-related methods.</p>
+</li>
+<li><p><code>fit.py</code></p>
+<p>Clustar module for fitting-related methods.</p>
+</li>
+<li><p><code>graph.py</code></p>
+<p>General module for graphing-related methods.</p>
+</li>
+<li><p><code>group.py</code></p>
+<p>Clustar module for grouping-related methods.</p>
+</li>
+<li><p><code>search.py</code></p>
+<p>Contains the <code>Clustar</code> hierarchical class, which is responsible for
+transforming all available FITS images in a specified directory into their
+respective <code>ClustarData</code> objects.</p>
+</li>
+</ol>
+<h2 id="notes">Notes</h2>
+<p>Visit <a href="https://clustar.github.io/">https://clustar.github.io/</a> for additional information.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/clustar/clustar.github.io/blob/main/docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

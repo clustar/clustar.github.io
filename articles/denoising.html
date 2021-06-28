@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Overview | Clustar </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Overview | Clustar ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="overview">Overview</h2>
+
+<p>The first step in the group-detection pipeline is to reduce the background noise in the raw FITS image data. In the Clustar package, all of the methods involved in the denoising step are listed in the <code>denoise.py</code> module.</p>
+<h2 id="circle-crop">Circle Crop</h2>
+<p>Given that most of the noise in a FITS file is concentrated around the corners of the image, we begin the preprocessing by transforming the square FITS image into a circle. In particular, the <code>crop</code> method is implemented to remove the intensities in the corners. Here, the user can define two optional parameters: <code>radius_factor</code> and <code>apply_gradient</code>.</p>
+<p>The <code>radius_factor</code> is number within the range $[0, 1]$ that is multiplied to the radius of the cropping circle; this determines the size of the circle. Shown below are three examples of how the <code>radius_factor</code> affects the cropping circle.</p>
+<center>
+    <img src="../image/radius_factor.png">
+</center>
+<p>The <code>apply_gradient</code> parameter determines if the FITS image should be multiplied by a gradient in order to elevate central points. With this multiplication, the erratic intensities that are located further away from the center are more likely to be accounted as noise. Shown below is the radial gradient that is multiplied to the FITS data.</p>
+<center>
+    <img src="../image/radial_gradient.png" width="500">
+</center>
+<h2 id="grid-computation">Grid Computation</h2>
+<p>The straightforward method for noise reduction is to determine a target threshold and automatically set all intensities below that threshold to zero. In <a href="https://www.gnu.org/software/gnuastro/manual/html_node/Sigma-clipping.html">sigma clipping</a>, the noise is assumed to follow a Gaussian distribution; from this, the standard deviation $(\sigma)$ and the median $(m)$ of the dataset are calculated. Given a coefficient, $\alpha$, any value that lies outside of the range $m \pm \alpha \sigma$ is considered to be noise.</p>
+<p>Inspired by sigma clipping, our denoising algorithm divides the FITS image to $n \times n$ grid (package keyword <code>chunks</code> parameter specifies $n$). For each cell in this grid, the root mean square (RMS) of the intensities are calculated. Given a <code>quantile</code> probability between $[0, 1]$, the specified quantile of all the RMS in the grid denotes the baseline noise threshold. The target threshold is obtained by multiplying this baseline threshold to a given <code>sigma</code> coefficient. All intensities below this target threshold are set to zero.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Since the <code>chunks</code> parameter determines the size of the grid, the computational complexity of the denoising process is tied to this parameter. On the backend, the package implements multithreading to expedite this process; the RMS value for each cell is run on a separate thread. For comparable results, it is recommened that the value of the <code>chunks</code> parameter is $3$, $5$, or $7$.</p>
+</div>
+<h2 id="denoise">Denoise</h2>
+<p>In the <code>denoise.py</code> module, the <code>resolve</code> method performs the entire denoising process, according to the specified <code>ClustarData</code> parameters. Shown below is the example FITS image before and after the denoising process; here, the background noise is removed.</p>
+<center>
+    <img src="../image/denoise.png">
+</center>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/clustar/clustar.github.io/blob/main/docs/articles/denoising.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

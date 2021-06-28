@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Core | Clustar </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Core | Clustar ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="core">Core</h1>
+
+<p>Contains the <code>ClustarData</code> class, which is responsible for executing the
+entire project pipeline for detecting groups in a single FITS image; this
+class also collects and stores all relevant data, statistics, and variables in
+this pipeline.</p>
+<hr>
+<h2 id="clustardata"><code>ClustarData</code></h2>
+<p>A class for executing the entire pipline for detecting groups in a FITS
+image and for storing all relevant data associated with each group.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>path</code> : (<code>str</code>) Path to FITS file.</li>
+<li><code>**kwargs</code> : (optional) See <code>~clustar.core.ClustarData.params</code> for other possible arguments.</li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>path</code> : (<code>str</code>) Path to FITS file.</li>
+<li><code>image</code> : (<code>Image</code>) Internal class for storing FITS image variables.</li>
+<li><code>params</code> : (<code>Params</code>) Internal class for specifying the <code>ClustarData</code> parameters.</li>
+<li><code>groups</code> : (<code>list</code>) List of <code>Group</code> objects extracted from the given FITS image.</li>
+<li><code>flag</code>: (<code>bool</code>) Holds <code>True</code> if any detected group in the FITS image is flagged for manual review, otherwise <code>False</code>.</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<pre><code>from clustar.core import ClustarData
+
+# Create the 'ClustarData' object by specifying the path to FITS file.
+cd = ClustarData(path='~/data/example.fits', threshold=0.025)
+
+# Visualize the detected groups.
+cd.identify()
+
+# Access individual 'Group' objects.
+cd.groups
+</code></pre>
+<hr>
+<h2 id="image"><code>Image</code></h2>
+<p>An internal <code>ClustarData</code> subclass for storing FITS image variables.</p>
+<h3 id="parameters-1">Parameters</h3>
+<ul>
+<li><code>data</code> : (<code>ndarray</code>) Raw data from the FITS image; must be 2-D.</li>
+<li><code>header</code> : (<code>dict</code>) Header dictionary stored in FITS file.</li>
+</ul>
+<h3 id="attributes-1">Attributes</h3>
+<ul>
+<li><code>clean</code> : (<code>ndarray</code>) Data from the FITS image after denoising process.</li>
+<li><code>x</code> : (<code>ndarray</code>) Index values of the 'x' position from the data.</li>
+<li><code>y</code> : (<code>ndarray</code>) Index values of the 'y' position from the data.</li>
+<li><code>pos</code> : (<code>ndarray</code>) Index values of the data, given as (x, y).</li>
+<li><code>nonzero</code> : (<code>ndarray</code>) Index values of nonzero points in the data.</li>
+<li><code>std</code> : (<code>ndarray</code>) Standard deviation values from each block in the grid composed in the denoise process; used to calculate the noise statistic.</li>
+<li><code>rms</code> : (<code>ndarray</code>) Root mean squared values from each block in the grid composed in the denoise process; used to calculate the noise statistic.</li>
+<li><code>noise</code> : (<code>float</code>) Noise statistic generated for the denoise process; values less than <code>noise</code> times <code>sigma</code> are set to zero.</li>
+<li><code>major</code> : (<code>float</code>) Length of the major axis for the beam.</li>
+<li><code>minor</code> : (<code>float</code>) Length of the minor axis for the beam.</li>
+<li><code>degrees</code> : (<code>float</code>) Degrees of rotation for the beam.</li>
+<li><code>area</code> : (<code>float</code>) Number of points inside the beam; used to identify groups smaller than the beam size.</li>
+</ul>
+<h3 id="raises">Raises</h3>
+<ul>
+<li><code>KeyError</code> : If the following keys are missing from the FITS header: <code>BMAJ</code>, <code>BMIN</code>, <code>BPA</code>, <code>CDELT1</code>, <code>CDELT2</code>, and <code>OBJECT</code>.</li>
+</ul>
+<hr>
+<h2 id="group"><code>Group</code></h2>
+<p>An internal <code>ClustarData</code> class for storing variables associated to a detection.</p>
+<h3 id="parameters-2">Parameters</h3>
+<ul>
+<li><code>bounds</code> : (<code>list</code>) List of four integers corresponding to minimum row value, maximum row value, minimum column value, and maximum column value in this order.</li>
+</ul>
+<h3 id="attributes-2">Attributes</h3>
+<ul>
+<li><code>image</code> : (<code>_Image</code>) Internal subclass for storing image variables.</li>
+<li><code>res</code> : (<code>_Res</code>) Internal subclass for storing residual variables.</li>
+<li><code>fit</code> : (<code>_Fit</code>) Internal subclass for storing fit variables.</li>
+<li><code>stats</code> : (<code>_Stats</code>) Internal subclass for storing statistics.</li>
+<li><code>metrics</code> : (<code>_Metrics</code>) Internal subclass for storing the evaluated metrics.</li>
+<li><code>flag</code> : (<code>bool</code>) Determines whether this group is marked for manual review.</li>
+</ul>
+<hr>
+<h2 id="_image"><code>_Image</code></h2>
+<p>An internal <code>Group</code> subclass for storing image variables associated to a detection.</p>
+<h3 id="parameters-3">Parameters</h3>
+<ul>
+<li><code>bounds</code> : (<code>list</code>) List of four integers corresponding to minimum row value, maximum row value, minimum column value, and maximum column value in this order.</li>
+</ul>
+<h3 id="attributes-3">Attributes</h3>
+<ul>
+<li><code>data</code> : (<code>ndarray</code>) Subset of raw data from the FITS image identifying the group.</li>
+<li><code>clean</code> : (<code>ndarray</code>) Data of the group after the denoising process.</li>
+<li><code>x</code> : (<code>ndarray</code>) Index values of the 'x' position from the group data.</li>
+<li><code>y</code> : (<code>ndarray</code>) Index values of the 'y' position from the group data.</li>
+<li><code>pos</code> : (<code>ndarray</code>) Index values of the group data, given as (x, y).</li>
+<li><code>nonzero</code> : (<code>ndarray</code>) Index values of nonzero points in the group data.</li>
+<li><code>ref</code> : (<code>list</code>) List containing the minimum row value and minimum column value of the group data.</li>
+<li><code>limit</code> : (<code>list</code>) List containing the maximum row value and maximum column value of the overall FITS image.</li>
+</ul>
+<hr>
+<h2 id="_residuals"><code>_Residuals</code></h2>
+<p>An internal <code>Group</code> subclass for storing residual variables associated to a detection.</p>
+<h3 id="parameters-4">Parameters</h3>
+<p>None</p>
+<h3 id="attributes-4">Attributes</h3>
+<ul>
+<li><code>data</code> : (<code>ndarray</code>) Residuals computed in the fitting process. Precisely, they are [1 - (&quot;bivariate Gaussian model&quot; / &quot;group data&quot;)].</li>
+<li><code>clean</code> : (<code>ndarray</code>) Residuals computed in the fitting process, where points outside of the ellipse are set to zero.</li>
+<li><code>pos</code> : (<code>ndarray</code>) Index values of the residual data, given as (x, y).</li>
+<li><code>inside</code> : (<code>ndarray</code>) Subset of index values that lie inside of the ellipse.</li>
+<li><code>outside</code> : (<code>ndarray</code>) Subset of index values that lie outside of the ellipse.</li>
+<li><code>output</code> : (<code>array_like</code>) List of residuals that lie inside of the ellipse; the result of the evaluation metric that is computed on this list is  compared to the specified threshold; this determines which groups are flagged for manual review.</li>
+</ul>
+<hr>
+<h2 id="_fit"><code>_Fit</code></h2>
+<p>An internal <code>Group</code> subclass for storing fit variables associated to a detection.</p>
+<h3 id="parameters-5">Parameters</h3>
+<p>None</p>
+<h3 id="attributes-5">Attributes</h3>
+<ul>
+<li><code>rv</code> : (<code>multivariate_normal_frozen</code>) Frozen multivariable normal distribution generated from the group statistics.</li>
+<li><code>bvg</code> : (<code>ndarray</code>) Results of the multivariate normal probability density function evaluated at the points specified by the group data.</li>
+<li><code>ellipse</code> : (<code>Polygon</code>) <code>Polygon</code> object containing the points that generate an ellipse corresponding to the multivariate normal distribution.</li>
+<li><code>major_peaks</code> : (<code>int</code>) Number of local maximas along the major axis of the ellipse.</li>
+<li><code>minor_peaks</code> : (<code>int</code>) Number of local maximas along the minor axis of the ellipse.</li>
+</ul>
+<hr>
+<h2 id="_stats"><code>_Stats</code></h2>
+<p>An internal <code>Group</code> subclass for storing statistics associated to a detection.</p>
+<h3 id="parameters-6">Parameters</h3>
+<p>None</p>
+<h3 id="attributes-6">Attributes</h3>
+<ul>
+<li><code>x_bar</code> : (<code>float</code>) Average of index values in the 'x' position weighted by the corresponding group data.</li>
+<li><code>y_bar</code> : (<code>float</code>) Average of index values in the 'y' position weighted by the corresponding group data.</li>
+<li><code>x_var</code> : (<code>float</code>) Variance of index values in the 'x' position weighted by the corresponding group data.</li>
+<li><code>y_var</code> : (<code>float</code>) Variance of index values in the 'y' position weighted by the corresponding group data.</li>
+<li><code>covariance</code> : (<code>float</code>) Covariance of the index values weighted by the corresponding group data.</li>
+<li><code>covariance_matrix</code> : (<code>array_like</code>) Covariance matrix for the multivariate normal that is used in the fitting process.</li>
+<li><code>rho</code> : (<code>float</code>) Correlation coefficient computed from the covariance matrix.</li>
+<li><code>eigen_values</code> : (<code>array_like</code>) Eigenvalues obtained from the eigendecomposition of the covariance matrix.</li>
+<li><code>eigen_vectors</code> : (<code>array_like</code>) Eigenvectors obtained from the eigendecomposition of the covariance matrix.</li>
+<li><code>x_len</code> : (<code>float</code>) Length of the major axis of the ellipse in pixels.</li>
+<li><code>y_len</code> : (<code>float</code>) Length of the minor axis of the ellipse in pixels.</li>
+<li><code>radians</code> : (<code>float</code>) Rotation of ellipse denoted in radians.</li>
+<li><code>degrees</code> : (<code>float</code>) Rotation of ellipse denoted in degrees.</li>
+</ul>
+<hr>
+<h2 id="_metrics"><code>_Metrics</code></h2>
+<p>An internal <code>Group</code> subclass for storing the evaluated metrics associated to a detection.</p>
+<h3 id="parameters-7">Parameters</h3>
+<p>None</p>
+<h3 id="attributes-7">Attributes</h3>
+<ul>
+<li><code>standard_deviation</code> : (<code>float</code>) Standard deviation of the output residuals for the group.</li>
+<li><code>variance</code> : (<code>float</code>) Variance of the output residuals for the group.</li>
+<li><code>average</code> : (<code>float</code>) Mean of the output residuals for the group.</li>
+<li><code>weighted_average</code> : (<code>float</code>) Mean of the output residuals weighted by the group data.</li>
+</ul>
+<hr>
+<h2 id="params"><code>Params</code></h2>
+<p>An internal <code>ClustarData</code> class for specifying the keyword parameters.</p>
+<h3 id="parameters-8">Parameters</h3>
+<ul>
+<li><code>args</code> : (<code>dict</code>) Dictionary of keyword arguments; see 'Attributes' for keys.</li>
+</ul>
+<h3 id="attributes-8">Attributes</h3>
+<ul>
+<li><code>radius_factor</code> : (<code>float</code>) Factor mulitplied to radius to determine cropping circle in the denoising process; must be within the range [0, 1].</li>
+<li><code>chunks</code> : (<code>int</code>) Number of chunks to use in a grid; must be an odd number.</li>
+<li><code>quantile</code> : (<code>float</code>) Quantile of RMS to determine the noise level; must be within the range [0, 1].</li>
+<li><code>apply_gradient</code> : (<code>bool</code>) Determine if the FITS image should be multiplied by a gradient in order to elevate central points; similar to multiplying the FITS image by the associated 'pb' data.</li>
+<li><code>sigma</code> : (<code>float</code>) Factor multiplied to noise level to determine the cutoff point, where values less than this threshold are set to zero.</li>
+<li><code>alpha</code> : (<code>float</code>) Determines the size of the ellipse in relation to the chi-squared distribution; must be within the range (0, 1).</li>
+<li><code>buffer_size</code> : (<code>int</code>) Number of points considered outside of the group range. For instance, given a 1-d group range of [10, 20], the algorithm checks for nonzero points within the range [5, 25] when the 'buffer_size' is 5.</li>
+<li><code>group_size</code> : (<code>int</code>) Minimum number of nonzero points that determines a group.</li>
+<li><code>group_factor</code> : (<code>float</code>) Ratio between [0, 1] that specifies the minimum number of nonzero points that determines a group in relation to the number of nonzero points in the largest group.</li>
+<li><code>metric</code> : (<code>str</code>) Method used for evaluating the groups; must be one of the following: <code>&quot;standard_deviation&quot;</code>, <code>&quot;variance&quot;</code>, <code>&quot;average&quot;</code>, or <code>&quot;weighted_average&quot;</code>.</li>
+<li><code>threshold</code> : (<code>float</code>) Cutoff point that determines which groups are flagged for manual review, given the specified metric.</li>
+<li><code>split_binary</code> : (<code>bool</code>) Experimental; determine whether binary subgroups identified within a group should be split into individual groups.</li>
+<li><code>subgroup_factor</code> : (<code>float</code>) Experimental; ratio between [0, 1] that specifies the subgroup range in terms of the absolute maximum intensity.</li>
+<li><code>evaluate_peaks</code> : (<code>bool</code>) Experimental; determine whether the peaks of the output residuals should be taken into consideration in the flagging process.</li>
+<li><code>smoothing</code> : (<code>int</code>) Experimental; size of window used in the moving average smoothing process for peak evaluation.</li>
+<li><code>clip</code> : (<code>float</code>) Experimental; determines the percentage of tail values that are trimmed for peak evaluation.</li>
+</ul>
+<h3 id="raises-1">Raises</h3>
+<p><code>KeyError</code> : If specified key in <code>args</code> does not match the label of the specified attributes.</p>
+<hr>
+<h2 id="methods">Methods</h2>
+<h3 id="update"><code>update</code></h3>
+<p>Updates the <code>Params</code> object with the specified arguments and executes the entire pipeline.</p>
+<h4 id="parameters-9">Parameters</h4>
+<ul>
+<li><code>**kwargs</code> : (optional) See <code>~clustar.core.ClustarData.params</code> for other possible arguments.</li>
+</ul>
+<h3 id="reset"><code>reset</code></h3>
+<p>Resets <code>Params</code> object to the default values, then updates <code>Params</code> object with the specified arguments and executes the entire pipeline.</p>
+<h4 id="parameters-10">Parameters</h4>
+<ul>
+<li><code>**kwargs</code> : (optional) See <code>~clustar.core.ClustarData.params</code> for other possible arguments.</li>
+</ul>
+<h3 id="identify"><code>identify</code></h3>
+<p>Displays the FITS image and identifies the groups in green, orange, or red rectangles, which are defined as: <br></p>
+<ol>
+<li>'Green' denotes that the group is not flagged for manual review</li>
+<li>'Orange' denotes that the group is not flagged for manual review,
+but the group is smaller than the beam size.</li>
+<li>'Red' denotes that the group is flagged for manual review.<br>
+Beam size is the white oval shown on the bottom right corner of
+the FITS image.</li>
+</ol>
+<h4 id="parameters-11">Parameters</h4>
+<ul>
+<li><code>vmin</code> : (<code>float</code>, optional) Lower bound for the shown intensities.</li>
+<li><code>vmax</code> : (<code>float</code>, optional) Upper bound for the shown intensities.</li>
+<li><code>show</code> : (<code>bool</code>, optional) Determines whether the groups should be identified. If <code>False</code>, the rectangles identifying the groups are not drawn.</li>
+<li><code>dpi</code> : (<code>int</code>, optional) Dots per inch.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/clustar/clustar.github.io/blob/main/docs/documentation/core.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021 Clustar<br>Generated with <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
