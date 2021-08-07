@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/pavan/OneDrive/Data Science/Projects/clustar.github.io/docs",
+  "source_base_path": "/Users/shannon/Documents/UVA/Capstone/clustar.github.io/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/denoising.html",
-          "hash": "enb5GYl72JRm3ghDQdNF/ZMKDaM5ss+d9AZ3BjwSTcE="
+          "hash": "MM/EC3JcGsYIJ+Ul7pLQfg=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/fitting.html",
-          "hash": "YLEDAwv3PnS2ImLGrmBx/qacb+IXjKkGaApl89d4Zf4="
+          "hash": "eSFwV7SP6w32QhNRg9T8xw=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/grouping.html",
-          "hash": "mbqLw9ap+Z8JslowkVBCsBY7GI7gDyKua78J9wOcMoI="
+          "hash": "AiMM5dbFulFeVJtakXkzSQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "LIK3lsvkLXiLeXLKNqIAEqi7FB08IwlxCi/zHP4T3hk="
+          "hash": "dPbFd6hkFHx9Dr4ZSWvCMQ=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "3IlWEjkTkkCHYQpwgEaKvLbb4fDarXeIjOd6JY0/u1I="
+          "hash": "U0fKfahELZHrTbZogABeug=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/core.html",
-          "hash": "aCDXlMAU0tOv2vpaqJ32dpPChsS7PcKBGnS2z02E5nY="
+          "hash": "Xat7sowV0WhI5lK53/BZMA=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/denoise.html",
-          "hash": "uY+10jUyGdoMH/NIxUe6p0FC530g0iNeyz1F1oSMStQ="
+          "hash": "gkwHWVNgSnbvR0UzCBDboA=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/fit.html",
-          "hash": "p+339EUP6feMIqyFpA+8MBr1csCycEIqTtwmSx4Ydkw="
+          "hash": "UGkOF8hrnQLIkJ795e73uw=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/graph.html",
-          "hash": "WwLtaaO50zMHy2GfVkoWK8rqPPU7PY7hsBZUTCjeWV0="
+          "hash": "N4T18yDX/xvtkpMUUNQpnw=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/group.html",
-          "hash": "pLlzr941zw5n+1oXxocljo7wSc8euxPccS+eMIbXjU8="
+          "hash": "l05dz/1mw1arREs8I7Kjkw=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/search.html",
-          "hash": "T2rsP2qWlngCjuoYRcQEs0XQwKZ+fHVn2D/ZrErG+bA="
+          "hash": "GDX8HlO7j1xA0FSNc4/whg=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "n92pgqIY/wFc3BtqQJ6kYyUvMCID4CwNPwj4PuG+X5Y="
+          "hash": "c7RP4DB5FsK/84goKMft9Q=="
         }
       },
       "is_incremental": false,
@@ -305,7 +305,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "FpUrX/6iMPycBdOeIvklLGCWSuLO9QJ5Td89o3NfchM="
+          "hash": "pg6gP2dpy85E9E6hhHmLtA=="
         }
       },
       "is_incremental": false,
@@ -317,7 +317,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "+nYJI63qysgkqxila15DuC0d/2COrYUbQJz+QpjZD6M="
+          "hash": "eXh5x+xSEwWEVrbgG99bIA=="
         }
       },
       "is_incremental": false,
@@ -329,7 +329,7 @@
       "output": {
         ".html": {
           "relative_path": "usage/examples.html",
-          "hash": "Aa6xAzlCGM4HrCRvxQ7xEuLDWPDubpv3bGYUT3lYZjc="
+          "hash": "ceBw/J1lyiRgHi1J9pmgnw=="
         }
       },
       "is_incremental": false,
@@ -341,7 +341,7 @@
       "output": {
         ".html": {
           "relative_path": "usage/toc.html",
-          "hash": "6dEtoHLq/5GRE93l/abzG7mAQdUYwY8KEzF886uNfyk="
+          "hash": "56YZ1GXG562RuFPGKA1wsw=="
         }
       },
       "is_incremental": false,
